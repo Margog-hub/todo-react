@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { useSnackbar } from 'notistack'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -10,6 +11,8 @@ import Stack from '@mui/material/Stack';
 
 function LoginForm(props) {
 const handleRegister = props.handleRegister
+const { enqueueSnackbar } = useSnackbar()
+
 const [data, setData] = useState('')
 const [pass, setPass] = useState('')
 
@@ -25,8 +28,13 @@ const handleLoginClick =()=> {
   // setUser(id)
   if( data === 'admin' && pass === "123") {
     props.setUser({name: data})
+    enqueueSnackbar("Ласкаво просимо, " + data, {
+      variant : 'success'
+    })
   } else {
-    console.error('Unknow user')
+    enqueueSnackbar('Неправильні дані або помилка сервера', {
+      variant: 'error'
+    })
   }
 }
   return (
