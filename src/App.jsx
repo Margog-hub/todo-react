@@ -5,13 +5,14 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Stack from '@mui/material/Stack';
 import SingUpForm from './components/SingUpForm';
+import HomePage from './components/Home/HomePage';
 
 function App() {
   const [user, setUser] = useState()
   return (
     <Stack sx={{ alignItems: 'center' }}>
       { user ?
-        <div> {user.name}</div> :
+        <HomePage username = {user.name}/> :
         <SingUpForm  setUser ={setUser} />
       }
     </Stack>
