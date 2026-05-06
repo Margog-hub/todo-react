@@ -6,7 +6,7 @@ import '@fontsource/roboto/700.css';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 
-function SingUpForm() {
+function SingUpForm(props) {
 const [isLoginForm, setIsLoginForm] = useState(true) 
 
 const handleLogin =() => {
@@ -19,7 +19,7 @@ const handleRegister =() => {
   return (
     <>
     {isLoginForm ? 
-    <LoginForm handleRegister={handleRegister}/> : 
+    <LoginForm  setUser ={props.setUser}handleRegister={handleRegister}/> : 
     <RegisterForm handleLogin={handleLogin}/>}
     </>
   )

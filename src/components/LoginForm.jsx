@@ -21,6 +21,14 @@ const handleChangePass =(e)=> {
  setPass(e.target.value)
 }
 
+const handleLoginClick =()=> {
+  // setUser(id)
+  if( data === 'admin' && pass === "123") {
+    props.setUser({name: data})
+  } else {
+    console.error('Unknow user')
+  }
+}
   return (
     <Stack sx={{ width: '400px' }} gap={2}>
     <Typography variant="h3" gutterBottom>
@@ -33,7 +41,7 @@ const handleChangePass =(e)=> {
     <TextField id="login" label="Логін" variant="standard" onChange={handleChangeLogin} value ={data}/>
     <TextField id="password" label="Пароль" variant="standard" type="password"
     onChange={handleChangePass} value={pass}/>
-    <Button variant="contained"> Війти</Button>
+    <Button variant="contained" onClick={handleLoginClick}> Війти</Button>
      </Stack> 
   )
 }
