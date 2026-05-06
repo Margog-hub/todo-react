@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -7,10 +7,14 @@ import Stack from '@mui/material/Stack';
 import SingUpForm from './components/SingUpForm';
 
 function App() {
+  const [user, setUser] = useState()
   return (
-  <Stack sx={{ alignItems: 'center' }}>
-  <SingUpForm />
-  </Stack>
+    <Stack sx={{ alignItems: 'center' }}>
+      { user ?
+        <div> {user.name}</div> :
+        <SingUpForm  setUser ={setUser} />
+      }
+    </Stack>
   )
 }
 
