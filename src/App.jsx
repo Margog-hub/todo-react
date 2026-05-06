@@ -9,12 +9,15 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 
 function App() {
- 
+const [isLoginForm, setIsLoginForm] = useState(true) 
 const [data, setData] = useState('')
 const [pass, setPass] = useState('')
 
 const handleLogin =() => {
-  setData(Date.now())
+  setIsLoginForm(true)
+}
+const handleRegister =() => {
+  setIsLoginForm(false)
 }
 
 const handleChangeLogin =(e)=> {
@@ -27,16 +30,35 @@ const handleChangePass =(e)=> {
   return (
     
     <Stack sx={{ alignItems: 'center' }}>
-      <Stack sx={{ width: '400px' }} gap={2}>
 
+    {isLoginForm ? 
+    <Stack sx={{ width: '400px' }} gap={2}>
     <Typography variant="h3" gutterBottom>
-        Вхід в сервіс {data}
+        Вхід в сервіс 
       </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+       Немає облікового запису?
+      </Typography>
+      <Button variant="text" onClick={handleRegister}>Зареєструватись</Button>
     <TextField id="login" label="Логін" variant="standard" onChange={handleChangeLogin} value ={data}/>
     <TextField id="password" label="Пароль" variant="standard" type="password"
     onChange={handleChangePass} value={pass}/>
-    <Button variant="contained"onChange={handleLogin} >Війти</Button>
-     </Stack>
+    <Button variant="contained"> Війти</Button>
+     </Stack>  : 
+     <Stack sx={{ width: '400px' }} gap={2}>
+    <Typography variant="h3" gutterBottom>
+        Реєстрація
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom>
+       Є обліковий запис?
+      </Typography>
+      <Button variant="text" onClick={handleLogin}>Війти</Button>
+    <TextField id="login" label="Логін" variant="standard" onChange={handleChangeLogin} value ={data}/>
+    <TextField id="password" label="Пароль" variant="standard" type="password"
+    onChange={handleChangePass} value={pass}/>
+    <Button variant="contained"> Зареєструватись</Button>
+     </Stack>}
+      
     </Stack>
   
   )
