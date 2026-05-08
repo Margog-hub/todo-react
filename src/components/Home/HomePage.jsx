@@ -35,6 +35,12 @@ const HomePage = (props) => {
     {...todo, isDone: !todo.isDone} : todo
    }))
   }
+
+    const handleUpDateTodo =(_id, title, desc) => {
+   setTodos( todos.map((todo) => { return todo._id === _id ?
+    {...todo, title: title, description: desc} : todo
+   }))
+  }
   return (
     <div>
       <Typography variant="subtitle1" gutterBottom>
@@ -47,7 +53,9 @@ const HomePage = (props) => {
           <TodoItem key={todo._id} 
           todo={todo} 
           handleDeleteTodo={handleDeleteTodo}
-          handleisDoneTodo = {handleisDoneTodo}/>
+          handleisDoneTodo = {handleisDoneTodo}
+          handleUpDateTodo = {handleUpDateTodo}
+          />
         ))
       }
 
