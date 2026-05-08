@@ -26,12 +26,9 @@ const HomePage = (props) => {
     setTodos([newTodo, ...todos])
   }
 
-
-
   const handleDeleteTodo =(_id) => {
    setTodos( todos.filter((todo) => { return todo._id !== _id}))
   }
-
 
   const handleisDoneTodo =(_id) => {
    setTodos( todos.map((todo) => { return todo._id === _id ?

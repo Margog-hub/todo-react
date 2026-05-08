@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 
-
 const TodoItem = (props) => {
   const todo = props.todo
   const handleDeleteTodo = () => {props.handleDeleteTodo(todo._id)}
