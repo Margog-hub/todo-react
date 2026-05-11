@@ -19,8 +19,8 @@ const handleRegister =() => {
   return (
     <>
     {isLoginForm ? 
-    <LoginForm  setUser ={props.setUser}handleRegister={handleRegister}/> : 
-    <RegisterForm handleLogin={handleLogin}/>}
+    <LoginForm  setUser ={props.setUser} handleRegister={handleRegister}/> : 
+    <RegisterForm setUser ={props.setUser} handleLogin={handleLogin}/>}
     </>
   )
 }
