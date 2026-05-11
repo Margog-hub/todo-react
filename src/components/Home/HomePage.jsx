@@ -46,6 +46,7 @@ const HomePage = (props) => {
       <Typography variant="subtitle1" gutterBottom>
         {props.username}
       </Typography>
+      
       <AddTodo addTodo={handleAddTodo} />
 
       {
@@ -58,7 +59,6 @@ const HomePage = (props) => {
           />
         ))
       }
-
     </div>
   )
 }

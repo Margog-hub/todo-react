@@ -12,7 +12,7 @@ const TodoItem = (props) => {
   const todo = props.todo
 
   const [isEdit, setIsEdit] = useState(false)
-  const[title, setTitle] = useState(todo.title || title);
+  const [title, setTitle] = useState(todo.title || title);
   const [desc, setDesc] = useState(todo.description || desc)
 
   const handleChangeTitle = (e) => {
@@ -33,7 +33,7 @@ const TodoItem = (props) => {
   const toggleIsEdit = () => {
     setIsEdit(!isEdit)
     if (isEdit) {
-props.handleUpDateTodo (todo._id, title,desc)
+      props.handleUpDateTodo(todo._id, title, desc)
     }
   }
   return (
@@ -58,8 +58,11 @@ props.handleUpDateTodo (todo._id, title,desc)
         <CardActions>
           <Checkbox checked={todo.isDone} onChange={handleisDoneTodo} />
           <Button size="small" onClick={toggleIsEdit}>
-            {isEdit ? "Зберегти" : "Редагувати"}</Button>
-          <Button size="small" sx={{ backgroundColor: 'red', color: 'white' }} onClick={handleDeleteTodo}>Видалить</Button>
+            {isEdit ? "Зберегти" : "Редагувати"}
+          </Button>
+          <Button size="small" sx={{ backgroundColor: 'red', color: 'white' }} onClick={handleDeleteTodo}>
+            Видалить
+          </Button>
         </CardActions>
       </Card>
     </div>
