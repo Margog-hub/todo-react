@@ -10,43 +10,43 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 
 const AddTodo = (props) => {
-const [title, setTitle] = useState('');
-const [desc, setDesc] = useState('')
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('')
 
-const handleChangeTitle =(e)=> {
-setTitle(e.target.value)
-}
-const handleChangeDesc =(e)=> {
-setDesc(e.target.value)
-}
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value)
+  }
+  const handleChangeDesc = (e) => {
+    setDescription(e.target.value)
+  }
 
-const handleAddTodo =() => {
-  props.addTodo(title, desc)
-  reset()
-}
+  const handleAddTodo = () => {
+    props.addTodo(title, description)
+    reset()
+  }
 
-const reset =() => {
- setTitle('');
- setDesc('');
-}
+  const reset = () => {
+    setTitle('');
+    setDescription('');
+  }
+
+
   return (
-    <div>
-      <Accordion >
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          Додавання нового завдання
-        </AccordionSummary>
-        <AccordionDetails>
-          <Stack>
-            <TextField size='small' label='Заголовол' value={title} onChange={handleChangeTitle }/>
-            <TextField size='small' label='Опис' value={desc} onChange={handleChangeDesc} />
-          </Stack>
-        </AccordionDetails>
-        <AccordionActions>
-          <Button onClick={reset}>Скинути</Button>
-          <Button onClick={handleAddTodo}>Додати</Button>
-        </AccordionActions>
-      </Accordion>
-    </div>
+    <Accordion disabled={props.isLoading}>
+      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        Додавання нового завдання
+      </AccordionSummary>
+      <AccordionDetails>
+        <Stack>
+          <TextField size='small' label='Заголовол' value={title} onChange={handleChangeTitle} />
+          <TextField size='small' label='Опис' value={description} onChange={handleChangeDesc} />
+        </Stack>
+      </AccordionDetails>
+      <AccordionActions>
+        <Button onClick={reset}>Скинути</Button>
+        <Button onClick={handleAddTodo}>Додати</Button>
+      </AccordionActions>
+    </Accordion>
   )
 }
 

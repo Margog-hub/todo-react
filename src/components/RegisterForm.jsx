@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
 import '@fontsource/roboto/300.css';
@@ -12,24 +12,24 @@ import Stack from '@mui/material/Stack';
 
 
 function RegisterForm(props) {
-const handleLogin = props.handleLogin
-const { enqueueSnackbar } = useSnackbar();
+  const handleLogin = props.handleLogin
+  const { enqueueSnackbar } = useSnackbar();
 
-const [data, setData] = useState('')
-const [pass, setPass] = useState('')
-const [isLoading, setIsLoading] = useState(false);
-
-
-const handleChangeLogin =(e)=> {
- setData(e.target.value)
-}
-
-const handleChangePass =(e)=> {
- setPass(e.target.value)
-}
+  const [data, setData] = useState('')
+  const [pass, setPass] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
 
 
- const handleRegisterClick = async (event) => {
+  const handleChangeLogin = (e) => {
+    setData(e.target.value)
+  }
+
+  const handleChangePass = (e) => {
+    setPass(e.target.value)
+  }
+
+
+  const handleRegisterClick = async (event) => {
     if (event) event.preventDefault();
 
     setIsLoading(true);
@@ -41,46 +41,61 @@ const handleChangePass =(e)=> {
 
 
       if (response.data.username) {
-        props.setUser({ name: response.data.username });
+        props.setUser(response.data);
+        if (response.data.access_token) {
+          localStorage.setItem('token', response.data.access_token);
+        }
         enqueueSnackbar(`Ласкаво просимо, ${response.data.username}`, {
           variant: 'success',
         });
       }
     } catch (e) {
-
       const errorMsg = e.response?.data?.message || 'Помилка авторизації';
       enqueueSnackbar(errorMsg, { variant: 'error' });
-      console.error("Login error:", e);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-     <Stack   
+    <Stack
       component="form"
       onSubmit={handleRegisterClick}
       sx={{ width: '400px' }}
       gap={2}
-      >
-    <Typography variant="h3" gutterBottom>
+    >
+      <Typography variant="h3" gutterBottom>
         Реєстрація
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
-       Є обліковий запис?
+        Є обліковий запис?
       </Typography>
-      <Button variant="text" onClick={handleLogin}>Війти</Button>
-    <TextField id="login" label="Логін" variant="standard" onChange={handleChangeLogin} value ={data}/>
-    <TextField id="password" label="Пароль" variant="standard" type="password"
-    onChange={handleChangePass} value={pass}/>
-    <Button   
+      <Button
+        variant="text"
+        onClick={handleLogin}>
+        Війти
+      </Button>
+      <TextField
+        id="login"
+        label="Логін"
+        variant="standard"
+        onChange={handleChangeLogin}
+        value={data} />
+      <TextField
+        id="password"
+        label="Пароль"
+        variant="standard"
+        type="password"
+        onChange={handleChangePass}
+        value={pass} />
+      <Button
         type="submit"
         disabled={isLoading || !data || !pass}
         variant="contained"
-        > 
+      >
         Зареєструватись
-        </Button>
-     </Stack>
+      </Button>
+    </Stack>
   )
 }
 

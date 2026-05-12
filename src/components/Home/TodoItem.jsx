@@ -12,14 +12,14 @@ const TodoItem = (props) => {
   const todo = props.todo
 
   const [isEdit, setIsEdit] = useState(false)
-  const [title, setTitle] = useState(todo.title || title);
-  const [desc, setDesc] = useState(todo.description || desc)
+  const [title, setTitle] = useState(todo.title || '');
+  const [description, setDescription] = useState(todo.description || '')
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value)
   }
   const handleChangeDesc = (e) => {
-    setDesc(e.target.value)
+    setDescription(e.target.value)
   }
 
   const handleDeleteTodo = () => {
@@ -33,21 +33,35 @@ const TodoItem = (props) => {
   const toggleIsEdit = () => {
     setIsEdit(!isEdit)
     if (isEdit) {
-      props.handleUpDateTodo(todo._id, title, desc)
+      props.handleUpDateTodo(todo._id, title, description)
     }
   }
+
+  
   return (
     <div>
-      <Card sx={{ minWidth: 275, backgroundColor: todo.isDone ? '#fff010' : undefined }}>
+      <Card sx={{ minWidth: 275, backgroundColor: todo.completed ? '#fff010' : undefined }}>
         <CardContent>
           <Stack>
             {
-              isEdit ? <TextField size='small' label='Заголовол' value={title} onChange={handleChangeTitle} /> :
+              isEdit ?
+                <TextField
+                  disabled={props.isLoading}
+                  size='small'
+                  label='Заголовол'
+                  value={title}
+                  onChange={handleChangeTitle} /> :
                 <Typography gutterBottom >
                   {todo.title}
                 </Typography>}
             {
-              isEdit ? <TextField size='small' label='Опис' value={desc} onChange={handleChangeDesc} /> :
+              isEdit ?
+                <TextField
+                  disabled={props.isLoading}
+                  size='small'
+                  label='Опис'
+                  value={description}
+                  onChange={handleChangeDesc} /> :
                 <Typography variant="body2">
                   {todo.description}
                 </Typography>
@@ -56,11 +70,17 @@ const TodoItem = (props) => {
 
         </CardContent>
         <CardActions>
-          <Checkbox checked={todo.isDone} onChange={handleisDoneTodo} />
-          <Button size="small" onClick={toggleIsEdit}>
+          <Checkbox checked={todo.completed} onChange={handleisDoneTodo} />
+          <Button
+            disabled={props.isLoading}
+            size="small"
+            onClick={toggleIsEdit}>
             {isEdit ? "Зберегти" : "Редагувати"}
           </Button>
-          <Button size="small" sx={{ backgroundColor: 'red', color: 'white' }} onClick={handleDeleteTodo}>
+          <Button disabled={props.isLoading}
+            size="small"
+            sx={{ backgroundColor: 'red', color: 'white' }}
+            onClick={handleDeleteTodo}>
             Видалить
           </Button>
         </CardActions>

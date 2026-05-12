@@ -12,7 +12,7 @@ function App() {
   return (
     <Stack sx={{ alignItems: 'center' }}>
       { user ?
-        <HomePage username = {user.name}/> :
+        <HomePage user = {user}/> :
         <SingUpForm  setUser ={setUser} />
       }
     </Stack>

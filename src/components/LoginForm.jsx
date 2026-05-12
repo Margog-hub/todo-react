@@ -37,16 +37,17 @@ function LoginForm(props) {
       });
 
       if (response.data.username) {
-        props.setUser({ name: response.data.username });
+        props.setUser(response.data);
+        if (response.data.access_token) {
+          localStorage.setItem('token', response.data.access_token);
+        }
         enqueueSnackbar(`Ласкаво просимо, ${response.data.username}`, {
           variant: 'success',
         });
       }
     } catch (e) {
-
       const errorMsg = e.response?.data?.message || 'Помилка авторизації';
       enqueueSnackbar(errorMsg, { variant: 'error' });
-      console.error("Login error:", e);
     } finally {
       setIsLoading(false);
     }
