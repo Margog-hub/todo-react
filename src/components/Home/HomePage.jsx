@@ -35,19 +35,19 @@ const HomePage = (props) => {
     }
   }
 
-  const handleAddTodo = async(title, description) => {
-  if (!props.user?.access_token) return;
+  const handleAddTodo = async (title, description) => {
+    if (!props.user?.access_token) return;
     try {
       setIsLoading(true)
-      const response = await axios.post('https://todos-be.vercel.app/todos',{
-        "title": title ,
+      const response = await axios.post('https://todos-be.vercel.app/todos', {
+        "title": title,
         "description": description
       }, {
         headers: {
           "Authorization": `Bearer ${props.user.access_token}`
         }
       })
-     await getTodos()
+      await getTodos()
     }
     catch (e) {
       const errorMsg = e.response?.data?.message || 'Помилка авторизації';
@@ -59,15 +59,15 @@ const HomePage = (props) => {
   }
 
   const handleDeleteTodo = async (_id) => {
-     if (!props.user?.access_token) return;
+    if (!props.user?.access_token) return;
     try {
       setIsLoading(true)
-      const response = await axios.delete('https://todos-be.vercel.app/todos/' + _id,{
+      const response = await axios.delete('https://todos-be.vercel.app/todos/' + _id, {
         headers: {
           "Authorization": `Bearer ${props.user.access_token}`
         }
       })
-     await getTodos()
+      await getTodos()
     }
     catch (e) {
       const errorMsg = e.response?.data?.message || 'Помилка авторизації';
@@ -79,17 +79,17 @@ const HomePage = (props) => {
   }
 
   const handleisDoneTodo = async (_id) => {
-     if (!props.user?.access_token) return;
+    if (!props.user?.access_token) return;
     try {
       setIsLoading(true)
-      const response = await axios.patch('https://todos-be.vercel.app/todos/' + _id,{
+      const response = await axios.patch('https://todos-be.vercel.app/todos/' + _id, {
         completed: !todos.find(item => item._id === _id).completed
-      },{
+      }, {
         headers: {
           "Authorization": `Bearer ${props.user.access_token}`
         }
       })
-     await getTodos()
+      await getTodos()
     }
     catch (e) {
       const errorMsg = e.response?.data?.message || 'Помилка авторизації';
@@ -100,19 +100,19 @@ const HomePage = (props) => {
     }
   }
 
-  const handleUpDateTodo =  async (_id, title, description) => {
-     if (!props.user?.access_token) return;
+  const handleUpDateTodo = async (_id, title, description) => {
+    if (!props.user?.access_token) return;
     try {
       setIsLoading(true)
-      const response = await axios.patch('https://todos-be.vercel.app/todos/' + _id,{
-        title, 
+      const response = await axios.patch('https://todos-be.vercel.app/todos/' + _id, {
+        title,
         description
-      },{
+      }, {
         headers: {
           "Authorization": `Bearer ${props.user.access_token}`
         }
       })
-     await getTodos()
+      await getTodos()
     }
     catch (e) {
       const errorMsg = e.response?.data?.message || 'Помилка авторизації';
@@ -140,7 +140,7 @@ const HomePage = (props) => {
         {props.user?.username}
       </Typography>
 
-      <AddTodo addTodo={handleAddTodo} isLoading={isLoading}/>
+      <AddTodo addTodo={handleAddTodo} isLoading={isLoading} />
 
       {
         todos.map((todo) => (
