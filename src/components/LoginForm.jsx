@@ -10,11 +10,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../lib/userSlice';
 
 
 function LoginForm(props) {
   const { handleRegister } = props;
   const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch()
 
   const [data, setData] = useState('');
   const [pass, setPass] = useState('');
@@ -36,12 +39,9 @@ function LoginForm(props) {
         username: data.trim(),
         password: pass.trim(),
       });
-
       if (response.data.username) {
-        props.setUser(response.data);
-        if (response.data.access_token) {
-          localStorage.setItem('token', response.data.access_token);
-        }
+        const setUserAction = setUser(response.data)
+        dispatch(setUserAction)
         enqueueSnackbar(`Ласкаво просимо, ${response.data.username}`, {
           variant: 'success',
         });
