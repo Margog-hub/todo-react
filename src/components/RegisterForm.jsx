@@ -10,6 +10,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../lib/userSlice';
 
 
 function RegisterForm(props) {
@@ -19,6 +21,8 @@ function RegisterForm(props) {
   const [data, setData] = useState('')
   const [pass, setPass] = useState('')
   const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
 
   const handleChangeLogin = (e) => {
@@ -39,13 +43,9 @@ function RegisterForm(props) {
         username: data.trim(),
         password: pass.trim(),
       });
-
-
       if (response.data.username) {
-        props.setUser(response.data);
-        if (response.data.access_token) {
-          localStorage.setItem('token', response.data.access_token);
-        }
+        const setUserAction = setUser(response.data)
+        dispatch(setUserAction)
         enqueueSnackbar(`Ласкаво просимо, ${response.data.username}`, {
           variant: 'success',
         });
