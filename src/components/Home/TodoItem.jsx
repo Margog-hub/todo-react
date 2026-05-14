@@ -37,7 +37,7 @@ const TodoItem = (props) => {
     }
   }
 
-  
+
   return (
     <div>
       <Card sx={{ minWidth: 275, backgroundColor: todo.completed ? '#fff010' : undefined }}>

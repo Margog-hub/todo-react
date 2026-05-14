@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
+import { NavLink } from "react-router-dom";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -69,12 +70,9 @@ function RegisterForm(props) {
       </Typography>
       <Typography variant="subtitle1" gutterBottom>
         Є обліковий запис?
+        <NavLink to='/login'> Війти</NavLink>
       </Typography>
-      <Button
-        variant="text"
-        onClick={handleLogin}>
-        Війти
-      </Button>
+
       <TextField
         id="login"
         label="Логін"
