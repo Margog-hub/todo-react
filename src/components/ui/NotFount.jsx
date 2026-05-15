@@ -8,7 +8,7 @@ const NotFount = () => {
     <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
       <CloseIcon color='secondary' sx={{ width: '150px', height: '150px' }} />
       <Typography variant='h3'>Сторiнка на знайдена</Typography>
-      <NavLink to='/login'>Повернутися на головну</NavLink>
+      <NavLink to='/'>Повернутися на головну</NavLink>
     </Stack>
   )
 }
