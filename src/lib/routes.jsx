@@ -5,6 +5,7 @@ import RegisterForm from '../components/RegisterForm';
 import Layout from "../components/ui/Layout";
 import ErrorElement from "../components/ui/ErrorElement";
 import NotFount from "../components/ui/NotFount";
+import { Navigate } from "react-router-dom";
 
 export const router = createBrowserRouter([
   {
@@ -14,7 +15,8 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <Navigate to="/login" replace />,
+        // element: <HomePage />,
       },
       {
         path: "/login",

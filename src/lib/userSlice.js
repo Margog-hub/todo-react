@@ -17,12 +17,12 @@ export const userSlice = createSlice({
   },
   selectors: {
     selectUser: (state) => {
-      return state.user;
+      return state.user
     },
   },
 });
 
 export const { setUser, logout} = userSlice.actions;
-export const { selectors } = userSlice.selectors;
+export const { selecеUser } = userSlice.selectors;
 
 export default userSlice.reducer;
