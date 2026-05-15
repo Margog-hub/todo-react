@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { useSnackbar } from 'notistack';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -14,10 +14,10 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../lib/userSlice';
 
 
-function LoginForm(props) {
-  const { handleRegister } = props;
+function LoginForm() {
   const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const [data, setData] = useState('');
   const [pass, setPass] = useState('');
@@ -45,6 +45,7 @@ function LoginForm(props) {
         enqueueSnackbar(`Ласкаво просимо, ${response.data.username}`, {
           variant: 'success',
         });
+        navigate('/');
       }
     } catch (e) {
       const errorMsg = e.response?.data?.message || 'Помилка авторизації';

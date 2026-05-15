@@ -8,9 +8,9 @@ import Button from '@mui/material/Button';
 import { NavLink, Outlet } from 'react-router-dom';
 
 const navItems = [
-  <NavLink to='login'> Login</NavLink>,
-  <NavLink to='register'>Register </NavLink>,
-  <NavLink to='about'> About</NavLink>
+  <NavLink style={{ color: '#fff' }} to='/login'> Login</NavLink>,
+  <NavLink style={{ color: '#fff' }} to='/register'>Register </NavLink>,
+  <NavLink style={{ color: '#fff' }} to='/about'> About</NavLink>
 ];
 
 const Layout = () => {
@@ -21,13 +21,13 @@ const Layout = () => {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1 }}
           >
             TodoLost
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box >
             {navItems.map((item, index) => (
-              <Button key={index} sx={{ color: '#fff' }}>
+              <Button key={index} size='small'>
                 {item}
               </Button>
             ))}
