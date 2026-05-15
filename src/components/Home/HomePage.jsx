@@ -7,21 +7,24 @@ import AddTodo from './AddTodo';
 import axios from 'axios';
 import { useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../lib/userSlice';
+import { Navigate } from 'react-router-dom';
 
-
-const HomePage = (props) => {
+const HomePage = () => {
   const [todos, setTodos] = useState([])
   const [isLoading, setIsLoading] = useState(false);
 
   const { enqueueSnackbar } = useSnackbar();
+  const user = useSelector(selectUser)
 
   const getTodos = async () => {
-    if (!props.user?.access_token) return;
+    if (!user?.access_token) return;
     try {
       setIsLoading(true)
       const response = await axios.get('https://todos-be.vercel.app/todos', {
         headers: {
-          "Authorization": `Bearer ${props.user.access_token}`
+          "Authorization": `Bearer ${user?.access_token}`
         }
       })
       setTodos(response.data)
@@ -36,7 +39,7 @@ const HomePage = (props) => {
   }
 
   const handleAddTodo = async (title, description) => {
-    if (!props.user?.access_token) return;
+    if (!user?.access_token) return;
     try {
       setIsLoading(true)
       const response = await axios.post('https://todos-be.vercel.app/todos', {
@@ -44,7 +47,7 @@ const HomePage = (props) => {
         "description": description
       }, {
         headers: {
-          "Authorization": `Bearer ${props.user.access_token}`
+          "Authorization": `Bearer ${user?.access_token}`
         }
       })
       await getTodos()
@@ -59,12 +62,12 @@ const HomePage = (props) => {
   }
 
   const handleDeleteTodo = async (_id) => {
-    if (!props.user?.access_token) return;
+    if (!user?.access_token) return;
     try {
       setIsLoading(true)
       const response = await axios.delete('https://todos-be.vercel.app/todos/' + _id, {
         headers: {
-          "Authorization": `Bearer ${props.user.access_token}`
+          "Authorization": `Bearer ${user?.access_token}`
         }
       })
       await getTodos()
@@ -79,14 +82,14 @@ const HomePage = (props) => {
   }
 
   const handleisDoneTodo = async (_id) => {
-    if (!props.user?.access_token) return;
+    if (!user?.access_token) return;
     try {
       setIsLoading(true)
       const response = await axios.patch('https://todos-be.vercel.app/todos/' + _id, {
         completed: !todos.find(item => item._id === _id).completed
       }, {
         headers: {
-          "Authorization": `Bearer ${props.user.access_token}`
+          "Authorization": `Bearer ${user?.access_token}`
         }
       })
       await getTodos()
@@ -101,7 +104,7 @@ const HomePage = (props) => {
   }
 
   const handleUpDateTodo = async (_id, title, description) => {
-    if (!props.user?.access_token) return;
+    if (!user?.access_token) return;
     try {
       setIsLoading(true)
       const response = await axios.patch('https://todos-be.vercel.app/todos/' + _id, {
@@ -109,7 +112,7 @@ const HomePage = (props) => {
         description
       }, {
         headers: {
-          "Authorization": `Bearer ${props.user.access_token}`
+          "Authorization": `Bearer ${user?.access_token}`
         }
       })
       await getTodos()
@@ -124,10 +127,14 @@ const HomePage = (props) => {
   }
 
   useEffect(() => {
-    if (props.user?.access_token) {
+    if (user?.access_token) {
       getTodos();
     }
-  }, [props.user?.access_token]);
+  }, [user?.access_token]);
+
+  if (!user) {
+    return <Navigate to='/login' />
+  }
 
   if (isLoading && todos.length === 0) {
     return <CircularProgress />
@@ -137,7 +144,7 @@ const HomePage = (props) => {
   return (
     <div>
       <Typography variant="subtitle1" gutterBottom>
-        {props.user?.username}
+        {user?.username}
       </Typography>
 
       <AddTodo addTodo={handleAddTodo} isLoading={isLoading} />
