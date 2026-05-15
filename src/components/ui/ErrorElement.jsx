@@ -9,7 +9,7 @@ const ErrorElement = () => {
       <NotInterestedIcon color='error' sx={{ width: '150px', height: '150px' }} />
       <Typography variant='h3'>Сталася помилка</Typography>
       <Typography >Працюємо над її усуненням</Typography>
-      <NavLink to='/login'>Повернутися на головну</NavLink>
+      <NavLink to='/'>Повернутися на головну</NavLink>
     </Stack>
   )
 }

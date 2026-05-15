@@ -6,14 +6,25 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { NavLink, Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../lib/userSlice';
+import PersonIcon from '@mui/icons-material/Person';
 
-const navItems = [
+const unLoggedItems = [
   <NavLink style={{ color: '#fff' }} to='/login'> Login</NavLink>,
   <NavLink style={{ color: '#fff' }} to='/register'>Register </NavLink>,
   <NavLink style={{ color: '#fff' }} to='/about'> About</NavLink>
 ];
 
+const loggedItems = [
+  <NavLink style={{ color: '#fff' }} to='/about'> About</NavLink>,
+  <NavLink style={{ color: '#fff' }} to='/profile'><PersonIcon /> </NavLink>
+];
+
 const Layout = () => {
+  const user = useSelector(selectUser);
+  const navItems = user ? loggedItems : unLoggedItems;
+
   return (
     <>
       <AppBar component="nav">
