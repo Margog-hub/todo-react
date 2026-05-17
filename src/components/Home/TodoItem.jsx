@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import { useNavigate } from 'react-router-dom';
 
 const TodoItem = (props) => {
   const todo = props.todo
@@ -14,6 +15,7 @@ const TodoItem = (props) => {
   const [isEdit, setIsEdit] = useState(false)
   const [title, setTitle] = useState(todo.title || '');
   const [description, setDescription] = useState(todo.description || '')
+  const navigate = useNavigate()
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value)
@@ -51,7 +53,8 @@ const TodoItem = (props) => {
                   label='Заголовол'
                   value={title}
                   onChange={handleChangeTitle} /> :
-                <Typography gutterBottom >
+                <Typography gutterBottom sx={{ cursor: 'pointer' }}
+                  onClick={() => { navigate(`/todos/${todo._id}`) }}>
                   {todo.title}
                 </Typography>}
             {
