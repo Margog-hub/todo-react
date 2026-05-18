@@ -22,7 +22,10 @@ const Profile = () => {
       <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: "medium" }}>
         {user.username}
       </Typography>
-      <Button onClick={logoutHandler} >Logout</Button>
+      <Button variant="contained" 
+        color="error" 
+        onClick={logoutHandler}
+        sx={{ width: '100%', maxWidth: 200 }}>Logout</Button>
     </Stack>
   )
 }
