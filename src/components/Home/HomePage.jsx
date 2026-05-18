@@ -42,7 +42,7 @@ const HomePage = () => {
     if (!user?.access_token) return;
     try {
       setIsLoading(true)
-      const response = await axios.post('https://todos-be.vercel.app/todos' + id, {
+      const response = await axios.post('https://todos-be.vercel.app/todos', {
         "title": title,
         "description": description
       }, {
@@ -50,7 +50,7 @@ const HomePage = () => {
           "Authorization": `Bearer ${user?.access_token}`
         }
       })
-      await getTodos()
+      await getTodos();
     }
     catch (e) {
       const errorMsg = e.response?.data?.message || 'Помилка авторизації';
