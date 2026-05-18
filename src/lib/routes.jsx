@@ -4,10 +4,10 @@ import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import Layout from "../components/ui/Layout";
 import ErrorElement from "../components/ui/ErrorElement";
-import NotFount from "../components/ui/NotFount";
+import NotFound from "../components/ui/NotFound";
 import Redirector from "../components/utils/Redirector";
 import Profile from "../components/profile/Profile";
-import Todo, { todoLoader } from "../components/Home/Todo";
+import Todo from "../components/Home/Todo";
 
 export const router = createBrowserRouter([
   {
@@ -22,8 +22,7 @@ export const router = createBrowserRouter([
             index: true,
             element: <HomePage />,
           },
-           {
-            loader: todoLoader,
+          {
             path: '/todos/:id',
             element: <Todo />,
           },
@@ -43,7 +42,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/*",
-        element: <NotFount />,
+        element: <NotFound />,
       },
     ]
   },
